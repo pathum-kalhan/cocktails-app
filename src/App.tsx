@@ -1,25 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
 
+import Home from "./pages/home";
+import Search from "./pages/search";
+
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Favorites from "./pages/favorites";
+import Layout from "./components/layout";
+import { FavoriteCocktailsProvider } from "./context/FavoriteCocktailsContext";
+import { SnackbarProvider } from "notistack";
 function App() {
+  const routers = createBrowserRouter([
+    {
+      element: <Layout />,
+      children: [
+        {
+          path: "/",
+          element: <Home />,
+        },
+        {
+          path: "/search",
+          element: <Search />,
+        },
+        {
+          path: "/favorites",
+          element: <Favorites />,
+        },
+      ],
+    },
+  ]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <SnackbarProvider>
+      <FavoriteCocktailsProvider>
+        <RouterProvider router={routers} />
+      </FavoriteCocktailsProvider>
+    </SnackbarProvider>
   );
 }
 

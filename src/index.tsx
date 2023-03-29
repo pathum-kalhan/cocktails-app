@@ -3,14 +3,36 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
+import { ThemeProvider ,createTheme} from "@mui/material/styles";
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+const theme = createTheme(
+  {
+    palette: {
+      primary: {
+        main: "#8E44AD",
+      },
+    },
+
+    components: { 
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            textTransform: "none",
+          },
+        },
+      },
+    },
+  }
+);
 root.render(
-  <React.StrictMode>
+  
+    <ThemeProvider theme={theme}>
+
     <App />
-  </React.StrictMode>
+    </ThemeProvider>
+ 
 );
 
 // If you want to start measuring performance in your app, pass a function
